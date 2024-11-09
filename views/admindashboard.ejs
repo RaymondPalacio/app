@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        <p>Welcome, <%= user.name %>!</p>
+        <!-- Button to navigate to Add Product page -->
+        <h3>Product Management</h3>
+        <a href="/addproduct" class="btn">Add Product</a>
+
+        <h3>All Products</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(function(product) { %>
+                    <tr>
+                        <td><%= product.name %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.description || "No description" %></td>
+                        <td><%= product.category || "Uncategorized" %></td>
+                        <td><%= product.stock %></td>
+                        <td>
+                            <a href="/editproduct/<%= product._id %>" class="btn">Edit</a>
+                        </td>
+                        <td>
+                            <form action="/deleteproduct/<%= product._id %>" method="POST" style="display:inline;">
+                                <button type="submit" class="btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>
